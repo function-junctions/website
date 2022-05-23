@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'Horsemen';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Horsemen'), url('Horsemen.otf') format('opentype');
+  }

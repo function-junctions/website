@@ -1,0 +1,34 @@
+.function-junctions-appearance-dark.function-junctions-editor {
+  background-image: linear-gradient(to right, #2b2b2b 1px, transparent 1px),
+  linear-gradient(to bottom, #363636 1px, transparent 1px);
+  background-color: black;
+}
+
+.function-junctions-node {
+  &.node-transparent {
+    background: transparent;
+    opacity: 1 !important;
+    border: none;
+
+    .function-junctions-node-title  {
+      display: none;
+    }
+  }
+
+  &.node-no-title {
+    opacity: 1 !important;
+    .function-junctions-node-title  {
+      display: none;
+    }
+  }
+}
+
+.list {
+  ul {
+    background: transparent;
+
+    input {
+      font-size: 14px !important;
+    }
+  }
+}
