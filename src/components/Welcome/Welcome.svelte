@@ -57,7 +57,7 @@
       <br />
       <br />
       <div style="display: flex"> 
-        <a>Documentation</a>
+        <a href="/documentation" class="external">Documentation</a>
         <a>Examples</a>
       </div>
       <br />
