@@ -1,5 +1,5 @@
 <script>
-import { Block, Icon } from 'framework7-svelte';
+import { Icon } from 'framework7-svelte';
 
 </script>
 

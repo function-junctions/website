@@ -22,7 +22,7 @@
 </script>
 
 <svelte:head>
-  <title>Function Junction</title>
+  <title>Function Junctions</title>
 </svelte:head>
 
 <svelte:component this={App} />

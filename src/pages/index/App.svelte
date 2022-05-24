@@ -3,7 +3,6 @@
 </style>
 
 <script lang="ts">
-  import type { TitleNodeBlueprint } from './components/TitleNode';
   import type {
     EditorState,
     NodeBlueprint,
@@ -13,9 +12,15 @@
   import TextNode from './components/TextNode.svelte';
   import { Editor } from 'function-junctions';
   import TitleNode from './components/TitleNode.svelte';
+  import GitHubNode from './components/GitHubNode.svelte';
+  import ColorNode from './components/ColorNode.svelte';
+  import StyleNode from './components/StyleNode.svelte';
   import { App, Page, View } from 'framework7-svelte';
-import GitHubNode from './components/GitHubNode.svelte';
-import ColorNode from './components/ColorNode.svelte';
+  import WelcomeNode from './components/WelcomeNode.svelte';
+  import Welcome from '../../components/Welcome/Welcome.svelte';
+
+  let width = window.innerWidth;
+  const middleX = width / 2;
 
   const colorSocket: SocketBlueprint<string> = {
     type: 'color',
@@ -29,16 +34,33 @@ import ColorNode from './components/ColorNode.svelte';
     color: '#ff9500',
   };
 
-  const titleNode: TitleNodeBlueprint = {
+  const JSONSocket: SocketBlueprint<string> = {
+    type: 'JSON',
+    defaultValue: '',
+    color: '#673ab7',
+  };
+
+  const titleNode: NodeBlueprint<{
+    Title: SocketBlueprint<string>;
+    Subtitle: SocketBlueprint<string>;
+    'Primary A': SocketBlueprint<string>;
+    'Primary B': SocketBlueprint<string>;
+    'Secondary A': SocketBlueprint<string>;
+    'Secondary B': SocketBlueprint<string>;
+  },
+  {
+    Style: SocketBlueprint<string>;
+  }> = {
     outputs: {
-      Number: stringSocket,
+      Style: JSONSocket,
     },
     inputs: {
       Title: stringSocket,
       Subtitle: stringSocket,
       'Primary A': colorSocket,
       'Primary B': colorSocket,
-      Secondary: colorSocket,
+      'Secondary A': colorSocket,
+      'Secondary B': colorSocket,
     },
     component: TitleNode,
     className: 'node-transparent',
@@ -64,9 +86,25 @@ import ColorNode from './components/ColorNode.svelte';
     color: 'linear-gradient(#bf33d8, #9c27b0)',
   };
 
+  const styleNode: NodeBlueprint<{
+    Style: SocketBlueprint<string>;
+  }, Record<string, never>> = {
+    inputs: {
+      Style: JSONSocket,
+    },
+    component: StyleNode,
+    color: 'linear-gradient(#673ab7, #563098)',
+  };
+
   const githubNode: NodeBlueprint<Record<string, never>, Record<string, never>> = {
     component: GitHubNode,
     className: 'node-no-title',
+  };
+
+  const welcomeNode: NodeBlueprint<Record<string, never>, Record<string, never>> = {
+    component: WelcomeNode,
+    className: 'node-no-title',
+    style: `width: ${width - 600}px; height: 400px;overflow-y: scroll`,
   };
 
   const nodes = {
@@ -74,12 +112,14 @@ import ColorNode from './components/ColorNode.svelte';
     Text: textNode,
     GitHub: githubNode,
     Color: colorNode,
+    Style: styleNode,
+    Welcome: welcomeNode,
   };
 
   let state: EditorState = {
     nodes: {
       0: {
-        x: (window.innerWidth / 2) - 540,
+        x: 40,
         y: 107,
         type: 'Text',
         outputs: {
@@ -90,7 +130,7 @@ import ColorNode from './components/ColorNode.svelte';
         },
       },
       1: {
-        x: (window.innerWidth / 2) - 570,
+        x: 70,
         y: 240,
         type: 'Text',
         outputs: {
@@ -101,7 +141,7 @@ import ColorNode from './components/ColorNode.svelte';
         },
       },
       2: {
-        x: (window.innerWidth / 2) - 540,
+        x: 40,
         y: 370,
         type: 'Color',
         outputs: {
@@ -112,7 +152,7 @@ import ColorNode from './components/ColorNode.svelte';
         },
       },
       3: {
-        x: (window.innerWidth / 2) + 340,
+        x: width - 220,
         y: 400,
         type: 'Color',
         outputs: {
@@ -123,8 +163,8 @@ import ColorNode from './components/ColorNode.svelte';
         },
       },
       4: {
-        x: (window.innerWidth / 2) + 300,
-        y: 540,
+        x: 80,
+        y: 520,
         type: 'Color',
         outputs: {
           Color: {
@@ -134,22 +174,21 @@ import ColorNode from './components/ColorNode.svelte';
         },
       },
       5: {
-        x: (window.innerWidth / 2) - 300,
+        x: width - 250,
+        y: 540,
+        type: 'Color',
+        outputs: {
+          Color: {
+            type: 'color',
+            value: '#f008b7',
+          },
+        },
+      },
+      6: {
+        x: middleX - 300,
         y: 30,
         type: 'Title',
         inputs: {
-          'Primary A': {
-            type: 'number',
-            value: 0,
-          },
-          'Primary B': {
-            type: 'number',
-            value: 0,
-          },
-          'Secondary': {
-            type: 'number',
-            value: 0,
-          },
           Title: {
             connection: {
               connectedNodeId: '0',
@@ -182,7 +221,7 @@ import ColorNode from './components/ColorNode.svelte';
             type: 'color',
             value: '#e8b7ff',
           },
-          'Secondary': {
+          'Secondary A': {
             connection: {
               connectedNodeId: '4',
               connectedSocketId: 'Color',
@@ -190,17 +229,50 @@ import ColorNode from './components/ColorNode.svelte';
             type: 'color',
             value: '#f975f7',
           },
+          'Secondary B': {
+            type: 'color',
+            value: '#f008b7',
+            connection: {
+              connectedNodeId: '5',
+              connectedSocketId: 'Color',
+            },
+          },
+        },
+        outputs: {
+          type: 'JSON',
+          value: '{"Primary A":"#a441d2","Primary B":"#e8b7ff","Secondary A":"#f975f7","Secondary B":"#f008b7"}',
         },
       },
-      6: {
-        x: (window.innerWidth / 2) - 87.5,
-        y: 292,
+      7: {
+        x: width - 280,
+        y: 70,
+        type: 'Style',
+        inputs: {
+          Style: {
+            connection: {
+              connectedNodeId: '6',
+              connectedSocketId: 'Style',
+            },
+            type: 'JSON',
+            value: '{"Primary A":"#a441d2","Primary B":"#e8b7ff","Secondary A":"#f975f7","Secondary B":"#f008b7"}',
+          },
+        },
+      },
+      8: {
+        x: middleX - 88.5,
+        y: 310,
         type: 'GitHub',
+      },
+      9: {
+        x: middleX - ((width - 600) / 2),
+        y: 470,
+        type: 'Welcome',
       },
     },
   };
 
   $: console.log(state);
+
 </script>
 
 <App {...{
@@ -211,13 +283,17 @@ import ColorNode from './components/ColorNode.svelte';
 }}>
   <View main>
     <Page>
-      <Editor
-        {nodes}
-        pannable={false}
-        zoomable={false}
-        appearance="dark"
-        bind:state
-      />
+      {#if width > 1050}
+        <Editor
+          {nodes}
+          pannable={false}
+          zoomable={false}
+          appearance="dark"
+          bind:state
+        />
+      {:else}
+        <Welcome showCrazyTitle />
+      {/if}
     </Page>
   </View>
 </App>
