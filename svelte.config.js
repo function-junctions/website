@@ -9,7 +9,15 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
-		vite: () => ({ server: { port: 8100, host: true }}),
+		vite: () => ({
+			server: {
+				port: 8100,
+				host: true,
+			},
+			optimizeDeps: {
+				include: ['highlight.js', 'highlight.js/lib/core'],
+			},
+		}),
 	}
 };
 

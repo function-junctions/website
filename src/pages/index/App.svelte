@@ -104,7 +104,7 @@
   const welcomeNode: NodeBlueprint<Record<string, never>, Record<string, never>> = {
     component: WelcomeNode,
     className: 'node-no-title',
-    style: `width: ${width - 600}px; height: 400px;overflow-y: scroll`,
+    style: `width: ${width - 600}px; height: 400px;overflow-y: scroll;max-width: 1920px`,
   };
 
   const nodes = {
@@ -239,8 +239,10 @@
           },
         },
         outputs: {
-          type: 'JSON',
-          value: '{"Primary A":"#a441d2","Primary B":"#e8b7ff","Secondary A":"#f975f7","Secondary B":"#f008b7"}',
+          Style: {
+            type: 'JSON',
+            value: '{"Primary A":"#a441d2","Primary B":"#e8b7ff","Secondary A":"#f975f7","Secondary B":"#f008b7"}',
+          },
         },
       },
       7: {
@@ -279,7 +281,7 @@
   theme: 'ios',
   autoDarkMode: false,
   dark: true,
-  name: 'Kitchen Sink',
+  name: 'Function Junctions',
 }}>
   <View main>
     <Page>

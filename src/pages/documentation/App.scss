@@ -1,0 +1,45 @@
+pre {
+  margin-top: 5px;
+  code {
+    font-weight: 600;
+    padding: 0 25px !important;
+    border-radius: 8px;
+  }
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+h3 {
+  font-weight: 700;
+  font-size: 17px;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.page-content {
+  overflow-y: scroll !important;
+}
+
+.view {
+  background: black;
+}
+
+/* Panel and Master Detail Fixes */
+.panel-left.panel-in-breakpoint:before {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  content: '';
+  z-index: 6000;
+}
+
+html.with-panel-left-reveal .views, html.with-panel-left-reveal .framework7-root > .view {
+  transform: translate3d(var(--f7-panel-width), 0, 0) !important;
+  margin-right: 260px !important;
+  transition: transform 400ms ease-in-out, margin-right 0ms ease-in-out;
+}
