@@ -3,6 +3,7 @@
 </style>
 
 <script lang="ts">
+  /* eslint-disable no-useless-escape */
   import {
     App,
     Block,
@@ -55,7 +56,6 @@ const numberSocket: SocketBlueprint<number> = {
     nodes: `
 <script lang="ts">
   import type {
-    EditorState,
     NodeBlueprint,
     SocketBlueprint,
     Editor as EditorType,
@@ -614,8 +614,8 @@ const numberSocket: SocketBlueprint<number> = {
               <p />
               <span style="font-size: 12px">NumberNode.svelte</span>
               <Highlight language={xml} code={code.numberNode} />
-              <BlockFooter>The output socket is bound to the {'<input />'} component which changes the output value, which leads to the
-                MathNode input getting updated</BlockFooter>
+              <BlockFooter>The output socket is bound to the {'<input />'} component which changes the output value, which leads to any
+                connected input to get updated</BlockFooter>
               <br />
               <span style="font-size: 12px">MathNode.svelte</span>
               <Highlight language={xml} code={code.mathNode} />
@@ -641,8 +641,7 @@ const numberSocket: SocketBlueprint<number> = {
               <BlockFooter>Properties of the <span class="text-color-blue">EditorState</span> type</BlockFooter>
               <BlockFooter>
                 <i>
-                  Note: these properties should not be edited directly and should be obtained from the
-                  generated content from the editor by binding state
+                  Note: these properties should not be edited directly and should be obtained from the editor by binding state
                 </i>
               </BlockFooter>
               <br />
@@ -680,7 +679,7 @@ const numberSocket: SocketBlueprint<number> = {
                   </tbody>
                 </table>
               </div>
-              <BlockFooter><i>Note: Position is the position of your editor</i></BlockFooter>
+              <BlockFooter><i>The position of your editor</i></BlockFooter>
               <br />
               <br />
               <b>Nodes</b>
@@ -734,6 +733,7 @@ const numberSocket: SocketBlueprint<number> = {
                   </tbody>
                 </table>
               </div>
+              <br />
               <h3>Usage</h3>
               <p>
                 Finally let's put everything together. This strings together all the examples featured in
@@ -746,7 +746,7 @@ const numberSocket: SocketBlueprint<number> = {
               <span style="font-size: 12px">index.svelte</span>
               <Highlight language={xml} code={code.state} />
               <br />
-              <p>We're at the end! To see more examples, <a>visit the examples page...</a></p>
+              <p>We're at the end! To see more examples, <a href="/examples" class="external">visit the examples page...</a></p>
             </Block>
           </Page>
         </Tab>

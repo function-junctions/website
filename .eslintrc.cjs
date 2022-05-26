@@ -32,6 +32,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-unsafe-member-access': 'off',
     '@typescript-eslint/restrict-template-expressions': 'off',
+    'a11y-missing-attribute': 'off',
     'indent': ['error', 2, {'SwitchCase': 1}],
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-unsafe-assignment': 'off',
