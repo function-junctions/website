@@ -7,6 +7,7 @@
     PageContent,
     List,
     ListItem,
+    f7,
   } from 'framework7-svelte';
 
   import './Sidebar.scss';
@@ -23,6 +24,15 @@
   $: opened = !mobile;
   
   let ref: Panel;
+
+  $: (() => {
+    f7.$('html').removeClass('with-panel');
+    if (mobile) {
+      f7.$('html').removeClass('with-panel-left-reveal');
+    } else {
+      f7.$('html').removeClass('with-panel-left-cover');
+    }
+  })();
 
 </script>
 

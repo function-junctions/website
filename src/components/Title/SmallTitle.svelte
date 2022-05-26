@@ -1,4 +1,7 @@
 <style lang="scss">
+  a {
+    color: white;
+  }
   h1 {
     font-family: 'Horsemen';
     font-size: 13px;
@@ -9,6 +12,6 @@
   }
 </style>
 
-<h1 on:click={() => (window.location.href = '/')}>Function
-  <span style="color: #f975f7;margin-left: 17px">Junctions</span>
-</h1>
+<a href="/" class="external" sveltekit:reload>
+  <h1>Function <span style="color: #f975f7;margin-left: 17px">Junctions</span></h1>
+</a>

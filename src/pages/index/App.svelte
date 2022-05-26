@@ -273,8 +273,6 @@
     },
   };
 
-  $: console.log(state);
-
 </script>
 
 <App {...{

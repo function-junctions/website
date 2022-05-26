@@ -51,13 +51,16 @@
           width: 300px;
           text-transform: none;
         "
+        href="/documentation#getting-started"
+        class="external"
+        sveltekit:reload
       >
         Get Started
       </Button>
       <br />
       <br />
       <div style="display: flex"> 
-        <a href="/documentation" class="external">Documentation</a>
+        <a href="/documentation#getting-started" class="external" sveltekit:reload>Documentation</a>
         <a>Examples</a>
       </div>
       <br />
