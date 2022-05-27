@@ -8,7 +8,9 @@
     App,
     Block,
     BlockFooter,
+    Button,
     Page,
+    Segmented,
     Tab,
     Tabs,
     View,
@@ -21,6 +23,7 @@
   import typescript from 'svelte-highlight/languages/typescript';
   import shell from 'svelte-highlight/languages/shell';
   import github from 'svelte-highlight/styles/github-dark';
+import { Editor } from 'function-junctions/types';
 
   const code = {
     installation: `
@@ -647,6 +650,8 @@ const numberSocket: SocketBlueprint<number> = {
               <br />
               <br />
               <b>Position</b>
+              <BlockFooter>Properties of <span class="text-color-blue">Position</span>: ie. the position of your editor 'EditorState.position'</BlockFooter>
+              <p />
               <div class="data-table">
                 <table>
                   <thead>
@@ -679,10 +684,11 @@ const numberSocket: SocketBlueprint<number> = {
                   </tbody>
                 </table>
               </div>
-              <BlockFooter><i>The position of your editor</i></BlockFooter>
               <br />
               <br />
               <b>Nodes</b>
+              <BlockFooter>The properties in the <span class="text-color-blue">NodeState</span> object, which is accessed via 'EditorState.nodes[key]'</BlockFooter>
+              <p />
               <div class="data-table">
                 <table>
                   <thead>
@@ -736,7 +742,7 @@ const numberSocket: SocketBlueprint<number> = {
               <br />
               <h3>Usage</h3>
               <p>
-                Finally let's put everything together. This strings together all the examples featured in
+                Now let's put everything together. This strings together all the examples featured in
                 <a on:click={() => (activeTab = 'editor')}>Editor</a>,
                 <a on:click={() => (activeTab = 'sockets')}>Sockets</a>,
                 <a on:click={() => (activeTab = 'nodes')}>Nodes</a>, and
@@ -746,7 +752,91 @@ const numberSocket: SocketBlueprint<number> = {
               <span style="font-size: 12px">index.svelte</span>
               <Highlight language={xml} code={code.state} />
               <br />
-              <p>We're at the end! To see more examples, <a href="/examples" class="external">visit the examples page...</a></p>
+              <p>
+                Now that we know about the basic correlation between <a on:click={() => (activeTab = 'editor')}>the editor</a>
+                and it's respective components, let's take a look at
+                <a on:click={() => (activeTab = 'instance')}>the editor instance...</a>
+              </p>
+            </Block>
+          </Page>
+        </Tab>
+        <Tab tabActive={activeTab === 'instance'}>
+          <Page>
+            <Block>
+              <br />
+              <h1>Instance</h1>
+              <p>
+                The instance gives you more fine-grain control over the editor by exposing the internal
+                class keeping track of your state
+              </p>
+              <br />
+              <h3>Properties</h3>
+              <BlockFooter>Properties of the <span class="text-color-blue">Editor</span> class</BlockFooter>
+              <p />
+              <div class="data-table">
+                <table>
+                  <thead>
+                    <tr>
+                      <th class="label-cell">Property</th>
+                      <th class="label-cell">Type</th>
+                      <th class="label-cell">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="label-cell">addNode</td>
+                      <td class="label-cell">
+                        (key: string,
+                        position?: {'{ x: number, y: number }'},
+                        state?: {'{ id?: number; blueprint: '}
+                        <a on:click={() => (activeTab = 'state')}>EditorState['nodes']</a> {'}'}) => void</td>
+                      <td class="label-cell">Add a node in the editor. The key is the key name of your registered
+                        <a on:click={() => (activeTab = 'nodes')}>node</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label-cell">deleteNode</td>
+                      <td class="label-cell">
+                        (id: string) => void</td>
+                      <td class="label-cell">Delete a specific node in the editor.
+                        The ID in this context is the key of the node in the <a on:click={() => (activeTab = 'state')}>NodesState</a>
+                        property
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label-cell">cloneNode</td>
+                      <td class="label-cell">
+                        (id: string, position?: {'{ x: number, y: number }'}) => void</td>
+                      <td class="label-cell">Clone a specific node in the editor.
+                        The ID in this context is the key of the node in the <a on:click={() => (activeTab = 'state')}>NodesState</a>
+                        property
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label-cell">updateState</td>
+                      <td class="label-cell">
+                        () => void</td>
+                      <td class="label-cell">
+                        Manually call a state update. This is done automatically
+                        and is unlikely you will need to call this manually
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <br />
+              <br />
+              <p>We're at the end! To see more examples, <a on:click={() => (activeTab = 'examples')}>visit the examples page...</a></p>
+            </Block>
+          </Page>
+        </Tab>
+        <Tab tabActive={activeTab === 'examples'}>
+          <Page>
+            <Block>
+              <br />
+              <h1>Examples</h1>
+              <br />
+              <a>Demo page</a>
             </Block>
           </Page>
         </Tab>
@@ -789,6 +879,19 @@ const numberSocket: SocketBlueprint<number> = {
       color: 'purple',
       onClick: () => (activeTab = 'state'),
       active: activeTab === 'state',
+    },
+    {
+      title: 'Instance',
+      color: 'purple',
+      onClick: () => (activeTab = 'instance'),
+      active: activeTab === 'instance',
+    },
+    { title: '' },
+    {
+      title: 'Examples',
+      color: 'deeppurple',
+      onClick: () => (activeTab = 'examples'),
+      active: activeTab === 'examples',
     },
   ]} />
 </App>

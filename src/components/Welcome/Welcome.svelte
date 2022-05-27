@@ -61,7 +61,7 @@
       <br />
       <div style="display: flex"> 
         <a href="/documentation#getting-started" class="external" sveltekit:reload>Documentation</a>
-        <a>Examples</a>
+        <a href="/documentation#examples" class="external" sveltekit:reload>Examples</a>
       </div>
       <br />
     </div>
