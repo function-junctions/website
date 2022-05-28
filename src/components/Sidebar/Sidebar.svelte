@@ -12,7 +12,7 @@
 
   import './Sidebar.scss';
 
-  import SidebarToggle from './SideBarToggle.svelte';
+  import SidebarToggle from './SidebarToggle.svelte';
   import SmallTitle from '../Title/SmallTitle.svelte';
 
   export let items: (SidebarItem | SidebarTitle)[] = [];
