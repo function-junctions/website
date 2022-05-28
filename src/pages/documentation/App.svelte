@@ -184,6 +184,7 @@ const numberSocket: SocketBlueprint<number> = {
 <h1 style="text-align: center">{$output}</h1>
 <select
   bind:value={store.type}
+  style="width: 100%"
 >
   <option value="addition">Addition</option>
   <option value="subtraction">Subtraction</option>
@@ -789,7 +790,7 @@ const numberSocket: SocketBlueprint<number> = {
                         (key: string,
                         position?: {'{ x: number, y: number }'},
                         state?: {'{ id?: number; blueprint: '}
-                        <a on:click={() => (activeTab = 'state')}>EditorState['nodes']</a> {'}'}) => void</td>
+                        <a on:click={() => (activeTab = 'state')}>EditorState['nodes'][key]</a> {'}'}) => void</td>
                       <td class="label-cell">Add a node in the editor. The key is the key name of your registered
                         <a on:click={() => (activeTab = 'nodes')}>node</a>
                       </td>
@@ -835,8 +836,12 @@ const numberSocket: SocketBlueprint<number> = {
             <Block>
               <br />
               <h1>Examples</h1>
+              <BlockFooter>More examples will be added soon...</BlockFooter>
               <br />
-              <a>Demo page</a>
+              <br />
+              <a class="external" href="https://stackblitz.com/edit/fjs-basic?file=src%2FApp.svelte" target="_blank">Basic example</a>
+              <p />
+              <a class="external" href="https://stackblitz.com/edit/fjs-json?file=src%2FApp.svelte" target="_blank">Example with serialized JSON</a>
             </Block>
           </Page>
         </Tab>
