@@ -376,6 +376,12 @@ const numberSocket: SocketBlueprint<number> = {
                       <td class="label-cell">Use with <b>bind:</b> to get the editor instance</td>
                     </tr>
                     <tr>
+                      <td class="label-cell">interactable</td>
+                      <td class="label-cell">boolean</td>
+                      <td class="label-cell text-color-blue">true</td>
+                      <td class="label-cell">Allows the content of nodes to be interacted with</td>
+                    </tr>
+                    <tr>
                       <td class="label-cell">moveable</td>
                       <td class="label-cell">boolean</td>
                       <td class="label-cell text-color-blue">true</td>
